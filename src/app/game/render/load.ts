@@ -61,7 +61,7 @@ export type GameImages = {
       box, spikes, hp_frame, laser, cannon, cannon_bullets, chicken, key, chest, coin,
       enemy_idle, enemy_walk, enemy_hurt, enemy_death, enemy_attack
     ] = await Promise.all([
-      loadImage("/cat.png"),
+      loadImage("/Cat.png"),
       loadImage("/Pink_Monster_Idle_4.png"),
       loadImage("/Pink_Monster_Run_6.png"),
       loadImage("/Pink_Monster_Jump_8.png"),
@@ -98,11 +98,11 @@ export type GameImages = {
       loadImage("/Golden_Key.png"),
       loadImage("/Golden_Chest.png"),
       loadImage("/Coin.png"),
-      loadImage("/red/Idle.png"),
-      loadImage("/red/Walk.png"),
-      loadImage("/red/Hurt.png"),
-      loadImage("/red/Death.png"),
-      loadImage("/red/Attack.png"),
+      loadImage("/Red/Idle.png"),
+      loadImage("/Red/Walk.png"),
+      loadImage("/Red/Hurt.png"),
+      loadImage("/Red/Death.png"),
+      loadImage("/Red/Attack.png"),
     ]);
     return { chars, player_idle, player_run, player_jump, player_hurt, player_bullet, shield, trampoline, objects, bg, bgSky, bgCityFar, bgCityNear, bgDetail, bgTrees, tiles, tile_h, boss_idle, boss_walk, boss_run, boss_attack, boss_attack2, boss_attack3, boss_attack4, boss_death, boss_hurt, boss_bullet, box, spikes, hp_frame, laser, cannon, cannon_bullets, chicken, key, chest, coin, enemy_idle, enemy_walk, enemy_hurt, enemy_death, enemy_attack };
   }
