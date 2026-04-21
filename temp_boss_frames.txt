@@ -1,0 +1,10 @@
+Demon_Boss.png width: 96 frames: 1
+Demon_Boss_walk.png width: 576 frames: 6
+Demon_Boss_run.png width: 768 frames: 8
+Demon_Boss_attack1.png width: 384 frames: 4
+Demon_Boss_attack2.png width: 768 frames: 8
+Demon_Boss_attack3.png width: 576 frames: 6
+Demon_Boss_attack4.png width: 384 frames: 4
+Demon_Boss_hurt.png width: 384 frames: 4
+Demon_Boss_death.png width: 384 frames: 4
+Demon_Boss_sneer.png width: 576 frames: 6
