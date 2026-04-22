@@ -1,36 +1,159 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎮 Subuzlai — Pixel Platformer Game
 
-## Getting Started
+Subuzlai is a pixel-art 2D platformer built with **Next.js, React, TypeScript, and HTML Canvas**.
 
-First, run the development server:
+Fight enemies, unlock levels, collect coins, and defeat the final boss in a retro-style experience with modern web technologies.
 
-```bash
+
+<img width="538" height="322" alt="ezgif com-crop" src="https://github.com/user-attachments/assets/e7ef3146-7922-4b14-9d7f-ffd1d8910fd0" />
+<img width="534" height="323" alt="30bef97b-b803-4a11-893e-545c70a53b0a1-ezgif com-crop" src="https://github.com/user-attachments/assets/e1d11d53-f8c3-46e8-9ab2-60b872ef62b1" />
+
+
+
+
+
+---
+
+## ✨ Features
+
+* 🕹️ Smooth 2D platformer gameplay
+* 🔓 Progressive level unlocking system
+* 👾 Enemies, traps, and boss fight
+* 🛡️ Shield ability in boss level
+* 💾 Auto-save progress with localStorage
+* 🎬 Intro dialogues & ending credits
+* 🎉 Pixel confetti win animation
+* ⏸️ Pause / Restart / Level Select system
+* 🎧 Pixel-style sound effects (Web Audio API)
+* 🌄 Parallax background system
+
+---
+
+## 🎮 Controls
+
+| Key         | Action                   |
+| ----------- | ------------------------ |
+| ← / →       | Move                     |
+| ↑ / Space   | Jump                     |
+| Q           | Shoot                    |
+| C           | Shield (boss level only) |
+| R           | Restart level            |
+| ESC / Pause | Pause / Resume           |
+
+---
+
+## 🚀 Getting Started
+
+Run the development server:
+
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open in your browser:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[http://localhost:3000](http://localhost:3000)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧠 Gameplay
 
-To learn more about Next.js, take a look at the following resources:
+* Start from **Level 1**
+* Complete levels to unlock the next ones
+* Avoid traps and defeat enemies
+* Collect coins and survive
+* Final level = **Boss Fight**
+* Win → Ending credits 🎬
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Tech Stack
 
-## Deploy on Vercel
+* ⚡ Next.js — App structure & deployment
+* ⚛️ React — UI & game state management
+* 🟦 TypeScript — Type safety
+* 🎨 HTML Canvas — Game rendering
+* 💾 LocalStorage — Progress saving
+* 🔊 Web Audio API — Sound effects
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 Project Structure
+
+```
+src/app
+├── game
+│   ├── engine
+│   ├── render
+│   ├── PlatformerGame.tsx
+│   └── audio.ts
+├── ui
+├── levels.json
+└── page.tsx
+```
+
+---
+
+## 💾 Save System
+
+Progress is stored in the browser using `localStorage`.
+
+Levels unlock automatically after completion.
+
+---
+
+## ⚠️ Important Note
+
+File paths are **case-sensitive in production**.
+
+✔️ Correct:
+
+```
+/Cat.png
+/Red/Idle.png
+```
+
+❌ Wrong:
+
+```
+/cat.png
+/red/idle.png
+```
+
+---
+
+## 🌍 Deployment
+
+Deploy easily with Vercel:
+
+```
+npm run build
+```
+
+---
+
+## 🧪 Future Improvements
+
+* 📱 Mobile controls
+* 🎵 Background music
+* 👾 More enemies & levels
+* 🎮 Controller support
+* ⚙️ Settings menu
+* 🌐 Leaderboard
+
+---
+
+## 👨‍💻 Author
+
+**Anas Bounaim**
+
+* GitHub: [https://github.com/anasbounaiim](https://github.com/anasbounaiim)
+* LinkedIn: [https://www.linkedin.com/in/anas-bounaim-37450621a/](https://www.linkedin.com/in/anas-bounaim-37450621a/)
+
+---
+
+## 😄 Fun Footer
+
+© 2026 ANAS BOUNAIM — POWERED BY BUGS & ANIME ENERGY ⚡
+
+---
