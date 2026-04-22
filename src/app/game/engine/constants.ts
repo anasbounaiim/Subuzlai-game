@@ -12,4 +12,4 @@ export const PHYS = {
 };
 
 // LocalStorage key (⬅️ THIS WAS MISSING)
-export const STORAGE_KEY = "platformer_unlocked_level";
+export const STORAGE_KEY = "platformer_unlocked_level_v2";

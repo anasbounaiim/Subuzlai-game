@@ -6,6 +6,7 @@ import { W as WORLD_W, H as WORLD_H } from "../engine/constants";
 
 type EngineState = {
   level: any;
+  levelId?: number;
   human: any;
   bullets: any[];
   impacts?: any[];
@@ -354,6 +355,106 @@ export function renderGame(
     ctx.drawImage(laserImg, sx, 0, frameW, frameH, drawX, beamY, drawW, beamH);
   }
 
+  function drawKeycap(x: number, y: number, w: number, h: number, label: string) {
+    rect(x, y, w, h, "rgba(32,29,45,0.94)", "#fff7ff", 3);
+    rect(x + 4, y + 4, w - 8, 7, "rgba(255,247,255,0.16)");
+
+    ctx.save();
+    ctx.fillStyle = "#fff7ff";
+    ctx.font = "16px var(--font-pixel), 'Courier New', monospace";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.shadowColor = "#04193f";
+    ctx.shadowOffsetX = 3;
+    ctx.shadowOffsetY = 3;
+    ctx.shadowBlur = 0;
+    ctx.fillText(label, Math.floor(x + w / 2), Math.floor(y + h / 2 + 1));
+    ctx.restore();
+  }
+
+  function drawArrowKeycap(x: number, y: number, dir: "left" | "up" | "right", size: number) {
+    drawKeycap(x, y, size, size, "");
+
+    const cx = Math.floor(x + size / 2);
+    const cy = Math.floor(y + size / 2);
+    const unit = Math.max(3, Math.floor(size / 9));
+    const blocks =
+      dir === "up"
+        ? [
+            [0, -3], [-1, -2], [0, -2], [1, -2],
+            [-2, -1], [0, -1], [2, -1],
+            [0, 0], [0, 1], [0, 2],
+          ]
+        : dir === "left"
+          ? [
+              [-3, 0], [-2, -1], [-2, 0], [-2, 1],
+              [-1, -2], [-1, 0], [-1, 2],
+              [0, 0], [1, 0], [2, 0],
+            ]
+          : [
+              [3, 0], [2, -1], [2, 0], [2, 1],
+              [1, -2], [1, 0], [1, 2],
+              [0, 0], [-1, 0], [-2, 0],
+            ];
+
+    ctx.save();
+    ctx.fillStyle = "#fff7ff";
+    ctx.shadowColor = "#04193f";
+    ctx.shadowOffsetX = 2;
+    ctx.shadowOffsetY = 2;
+    ctx.shadowBlur = 0;
+    for (const [bx, by] of blocks) {
+      ctx.fillRect(cx + bx * unit - Math.floor(unit / 2), cy + by * unit - Math.floor(unit / 2), unit, unit);
+    }
+    ctx.restore();
+  }
+
+  function drawHintLabel(text: string, x: number, y: number, width: number) {
+    ctx.save();
+    ctx.fillStyle = "#fff7ff";
+    ctx.font = "4px var(--font-pixel), 'Courier New', monospace";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    ctx.shadowColor = "#04193f";
+    ctx.shadowOffsetX = 2;
+    ctx.shadowOffsetY = 2;
+    ctx.shadowBlur = 0;
+    ctx.fillText(text, Math.floor(x + width / 2), y);
+    ctx.restore();
+  }
+
+  function drawLevelOneControlsHint() {
+    if (st.levelId !== 1) return;
+
+    const firstRaisedPlatform = ((level as any).platforms ?? []).find((p: Rect) => p.y < WORLD_H - 80);
+    if (!firstRaisedPlatform) return;
+
+    const x = Math.floor(firstRaisedPlatform.x + 6);
+    const y = Math.floor(firstRaisedPlatform.y - 128);
+    const key = 28;
+    const gap = 10;
+    const moveW = key * 3 + gap * 2;
+    const groupGap = 42;
+    const shootX = x + moveW + groupGap;
+    const shieldX = shootX + 50 + groupGap;
+
+    ctx.save();
+    ctx.globalAlpha = 0.96;
+    drawArrowKeycap(x, y + key + gap, "left", key);
+    drawArrowKeycap(x + key + gap, y, "up", key);
+    drawArrowKeycap(x + (key + gap) * 2, y + key + gap, "right", key);
+    drawHintLabel("MOVE", x, y + key * 2 + gap * 2 + 6, moveW);
+    drawHintLabel("JUMP", x, y + key * 2 + gap * 2 + 20, moveW);
+
+    drawKeycap(shootX, y + key + gap, 44, key, "Q");
+    drawHintLabel("SHOOT", shootX, y + key * 2 + gap * 2 + 6, 44);
+
+    drawKeycap(shieldX, y + key + gap, 44, key, "C");
+    drawHintLabel("SHIELD", shieldX, y + key * 2 + gap * 2 + 6, 44);
+    drawHintLabel("BOSS", shieldX, y + key * 2 + gap * 2 + 20, 44);
+    ctx.restore();
+  }
+
   const { level, human, bullets } = st;
   // Update particles locally
   updateParticles(0.016);
@@ -386,6 +487,8 @@ export function renderGame(
   for (const p of ((level as any).platforms ?? []) as Rect[]) {
     drawPlatform(p);
   }
+
+  drawLevelOneControlsHint();
 
   // moving platforms
   for (const mp of ((level as any).movingPlatforms ?? []) as Rect[]) {

@@ -1911,7 +1911,7 @@ export function createEngine(events: EngineEvents, levelId = 1) {
   }
 
   function getState() {
-    return { level, human, bullets, impacts };
+    return { level, levelId, human, bullets, impacts };
   }
 
   return { step, draw, resetLevel, getState };

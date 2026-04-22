@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { loadUnlockedMax, saveUnlockedMax } from "../game/engine/storage";
+import { loadUnlockedMax } from "../game/engine/storage";
 import { getLevelCount } from "../levels";
 
 const UI = {
@@ -18,12 +18,10 @@ const UI = {
 
 export function LevelSelect(props: { onPick: (levelId: number) => void }) {
   const totalLevels = getLevelCount();
-  const [unlockedMax, setUnlockedMax] = useState(totalLevels);
+  const [unlockedMax, setUnlockedMax] = useState(1);
 
   useEffect(() => {
-    const fullyUnlocked = Math.max(loadUnlockedMax(), totalLevels);
-    saveUnlockedMax(fullyUnlocked);
-    setUnlockedMax(fullyUnlocked);
+    setUnlockedMax(Math.min(loadUnlockedMax(), totalLevels));
   }, [totalLevels]);
 
   const levels = useMemo(
@@ -153,15 +151,15 @@ export function LevelSelect(props: { onPick: (levelId: number) => void }) {
                     ...(locked ? lockedLevelButton : openLevelButton),
                   }}
                 >
-                  {id === 10 ? (
+                  {locked ? (
+                    <i aria-hidden="true" className="hn hn-lock-solid" style={lockedLevelIcon} />
+                  ) : id === 10 ? (
                     <img
                       src="/level10.png"
                       alt="Level 10"
                       draggable={false}
                       style={level10Image}
                     />
-                  ) : locked ? (
-                    "LOCK"
                   ) : (
                     id
                   )}
@@ -307,6 +305,13 @@ const lockedLevelButton: React.CSSProperties = {
   cursor: "not-allowed",
   opacity: 0.78,
   filter: "grayscale(0.35) brightness(0.82)",
+};
+
+const lockedLevelIcon: React.CSSProperties = {
+  color: UI.monsterWhite,
+  fontSize: "clamp(34px, 4.8vw, 52px)",
+  lineHeight: 1,
+  filter: `drop-shadow(4px 4px 0 ${UI.monsterInk})`,
 };
 
 const twoDigitLevelButton: React.CSSProperties = {
