@@ -412,7 +412,7 @@ export function renderGame(
   function drawHintLabel(text: string, x: number, y: number, width: number) {
     ctx.save();
     ctx.fillStyle = "#fff7ff";
-    ctx.font = "4px var(--font-pixel), 'Courier New', monospace";
+    ctx.font = "8px var(--font-pixel), 'Courier New', monospace";
     ctx.textAlign = "center";
     ctx.textBaseline = "top";
     ctx.shadowColor = "#04193f";
@@ -429,12 +429,14 @@ export function renderGame(
     const firstRaisedPlatform = ((level as any).platforms ?? []).find((p: Rect) => p.y < WORLD_H - 80);
     if (!firstRaisedPlatform) return;
 
-    const x = Math.floor(firstRaisedPlatform.x + 6);
-    const y = Math.floor(firstRaisedPlatform.y - 128);
-    const key = 28;
+    const x = Math.floor(firstRaisedPlatform.x - 18);
+    const y = Math.floor(firstRaisedPlatform.y - 148);
+    const key = 32;
     const gap = 10;
     const moveW = key * 3 + gap * 2;
-    const groupGap = 42;
+    const groupGap = 58;
+    const labelTop = y + key * 2 + gap * 2 + 12;
+    const labelLineHeight = 20;
     const shootX = x + moveW + groupGap;
     const shieldX = shootX + 50 + groupGap;
 
@@ -443,15 +445,15 @@ export function renderGame(
     drawArrowKeycap(x, y + key + gap, "left", key);
     drawArrowKeycap(x + key + gap, y, "up", key);
     drawArrowKeycap(x + (key + gap) * 2, y + key + gap, "right", key);
-    drawHintLabel("MOVE", x, y + key * 2 + gap * 2 + 6, moveW);
-    drawHintLabel("JUMP", x, y + key * 2 + gap * 2 + 20, moveW);
+    drawHintLabel("MOVE", x, labelTop, moveW);
+    drawHintLabel("JUMP", x, labelTop + labelLineHeight, moveW);
 
     drawKeycap(shootX, y + key + gap, 44, key, "Q");
-    drawHintLabel("SHOOT", shootX, y + key * 2 + gap * 2 + 6, 44);
+    drawHintLabel("SHOOT", shootX, labelTop, 44);
 
     drawKeycap(shieldX, y + key + gap, 44, key, "C");
-    drawHintLabel("SHIELD", shieldX, y + key * 2 + gap * 2 + 6, 44);
-    drawHintLabel("BOSS", shieldX, y + key * 2 + gap * 2 + 20, 44);
+    drawHintLabel("SHIELD", shieldX, labelTop, 44);
+    drawHintLabel("BOSS", shieldX, labelTop + labelLineHeight, 44);
     ctx.restore();
   }
 
